@@ -10,3 +10,4 @@ torchvision
 pillow
 python-multipart
 openai-clip
+opencv-python-headless
