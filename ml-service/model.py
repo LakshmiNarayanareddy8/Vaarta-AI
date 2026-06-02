@@ -14,8 +14,19 @@ from groq import Groq
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 client = Groq(api_key=GROQ_API_KEY)
 
+torch.set_num_threads(1)
 device = "cuda" if torch.cuda.is_available() else "cpu"
-clip_model, preprocess = clip.load("ViT-B/32", device=device)
+
+clip_model = None
+preprocess = None
+
+def get_clip():
+    global clip_model, preprocess
+    if clip_model is None:
+        import gc
+        clip_model, preprocess = clip.load("ViT-B/32", device=device)
+        gc.collect()
+    return clip_model, preprocess
 
 
 def extract_text_from_url(url):
@@ -60,12 +71,13 @@ def extract_text_from_url(url):
 
 
 def clip_check(image, text):
-    image_input = preprocess(image).unsqueeze(0).to(device)
+    model, prep = get_clip()
+    image_input = prep(image).unsqueeze(0).to(device)
     text_input = clip.tokenize([text]).to(device)
 
     with torch.no_grad():
-        image_features = clip_model.encode_image(image_input)
-        text_features = clip_model.encode_text(text_input)
+        image_features = model.encode_image(image_input)
+        text_features = model.encode_text(text_input)
         similarity = torch.cosine_similarity(image_features, text_features).item()
 
     return similarity
