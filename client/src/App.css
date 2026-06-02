@@ -1,0 +1,53 @@
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page Layout Wrappers */
+.page-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px; /* Space for navbar */
+}
+
+/* Specific utilities for layout */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-why {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .landing-why {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.grid-cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
