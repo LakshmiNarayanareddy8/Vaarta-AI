@@ -107,7 +107,8 @@ export default function Detect() {
       if (mode === "url") form.append("text", url);
       if (mode === "multimodal") { form.append("text", text); form.append("image", image); }
       
-      const res = await axios.post("http://localhost:5000/api/predict", form, {
+      const API_URL = import.meta.env.VITE_API_URL;
+      const res = await axios.post(`${API_URL}/api/predict`, form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setResult(res.data);

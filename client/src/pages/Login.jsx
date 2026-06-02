@@ -21,7 +21,8 @@ export default function Login() {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5000/api/auth/login", { email, password, role });
+      const API_URL = import.meta.env.VITE_API_URL;
+      const res = await axios.post(`${API_URL}/api/auth/login`, { email, password, role });
       login(res.data.token, res.data.role);
 
       if (res.data.role === "admin") navigate("/admin/dashboard");

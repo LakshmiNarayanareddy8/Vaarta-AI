@@ -11,7 +11,10 @@ const authMiddleware = require("./middleware/auth");
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://vaarta-ai-seven.vercel.app"
+  ],
   credentials: true
 }));
 
