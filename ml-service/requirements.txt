@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+gunicorn
+groq
+beautifulsoup4
+readability-lxml
+playwright
+torch
+torchvision
+pillow
+python-multipart
+openai-clip
